@@ -28,12 +28,9 @@ document.body.classList.toggle('dark');
 botonSwitch.classList.toggle('active');
 
 
-if (document.body.classList.contains('dark')){
-    localStorage.setItem('dark-mode', 'true' )
-} else {
-    localStorage.setItem('dark-mode', 'false' )}
-});
-
+document.body.classList.contains('dark') ? localStorage.setItem('dark-mode', 'true' ) : localStorage.setItem('dark-mode', 'false' )
+ 
+})
 
 if (localStorage.getItem('dark-mode')=== 'true')  {
 
@@ -122,6 +119,8 @@ function crearCard(producto){
     
     botonAgregar.onclick = (e) => {
     
+
+    
     alert(`producto agregado ${producto.nombre}`)
 
     let elementoCarro = new elementoCarrito (producto, 1);
@@ -148,12 +147,24 @@ function dibujarCarrito() {
                                 <td><input id="cantidad-producto-${elemento.producto.id}" type="number" value="${elemento.cantidad}" min="1" max="999" step="1" width:"50 px"></td>
                                 <td>${elemento.producto.precio}</td>
                                 <td>${elemento.producto.precio*elemento.cantidad}</td>
-                            
+                                <button class="botonBorrar"><i class="fa-solid fa-trash-can"></button></i>
             `;
 
             totalCarrito+=elemento.producto.precio*elemento.cantidad;
 
             contenedorCarrito.append(renglonCarrito);
+
+           //profe necesito ayuda para hacer funcionar el boton de elimnar productos del carrito por favor.
+
+            let botonBorrar = document.querySelector(".botonBorrar");
+            botonBorrar.addEventListener("click", function () {
+                renglonCarrito.innerHTML="";
+                
+                
+                
+               
+            });
+
 
             let inputCantidadProductos = document.getElementById(`cantidad-producto-${elemento.producto.id}`);
 
@@ -170,13 +181,7 @@ function dibujarCarrito() {
 );
 
 
-if (elementosCarrito == 0) {
-
-    contenedorFooterCarrito.innerHTML=` <th scope="row" colspan="5">Carrito vacío - comience a comprar!</th>`
-
-}else{
-    contenedorFooterCarrito.innerHTML=` <th scope="row" colspan="5">Total de compra $ ${totalCarrito}</th>`
-}
+elementosCarrito == 0 ?  contenedorFooterCarrito.innerHTML=` <th scope="row" colspan="5">Carrito vacío - comience a comprar!</th>` :  contenedorFooterCarrito.innerHTML=` <th scope="row" colspan="5">Total de compra $ ${totalCarrito}</th>`
 
 
 }
