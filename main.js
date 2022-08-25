@@ -117,17 +117,35 @@ function crearCard(producto){
     carta.append(cardBody);
 
     
+    botonVermas.onclick= (e) => {
+        Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'Something went wrong!',
+            footer: '<a href="">Why do I have this issue?</a>'
+          })};
+
+
+
     botonAgregar.onclick = (e) => {
     
-
-    
-    alert(`producto agregado ${producto.nombre}`)
+        Swal.fire({
+            imageUrl:"./imagenes/carrito.jpg",
+            imageHeight:250,
+            imageWidth:250,
+            title: `${producto.nombre} agregado`,
+            
+          })
 
     let elementoCarro = new elementoCarrito (producto, 1);
     elementosCarrito.push(elementoCarro);
 
+    
+    }
+    
+
     dibujarCarrito();
-}
+
     return carta;
 }
 
